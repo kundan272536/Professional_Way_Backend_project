@@ -2,6 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Professional way code for backend",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,5 +15,8 @@
     "code"
   ],
   "author": "Kundan Kumar",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^3.2.5"
+  }
 }
