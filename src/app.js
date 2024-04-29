@@ -14,4 +14,11 @@ app.use(express.urlencoded({extended:true,limit:"16kb"}));// Request getting fro
 app.use(express.static("public")); // For storing static image, pdf and another at local 
 app.use(cookieParser()); //For storing the cookie 
 
+
+// Import user router
+import userRouter from "./routes/user.routers.js";
+
+
+// Declaration of route
+app.use("/users",userRouter)
 export {app};
