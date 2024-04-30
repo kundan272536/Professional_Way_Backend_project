@@ -6,5 +6,9 @@ const registerUser=asynHandlers(async(req,res)=>{
         message:"ok"
     })
 });
-
-export default registerUser;
+const loginUser=asynHandlers(async(req,res)=>{
+    res.status(200).json({
+        message:"ok"
+    })
+});
+export {registerUser,loginUser};
