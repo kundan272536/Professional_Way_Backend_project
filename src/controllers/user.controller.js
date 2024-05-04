@@ -14,10 +14,10 @@ const registerUser=asynHandlers(async(req,res)=>{
     //check for user creation
     //return response
     const {username,email,fullname,password}=req.body;
-    if([username,email,fullname,pa].some((field)=>field.trim()==="")){
+    if([username,email,fullname,password].some((field)=>field.trim()==="")){
         throw new ApiError (400,"All fields are required")
     }
-    const existedUser=User.findOne({
+    const existedUser=await User.findOne({
         $or:[{username},{email}]
     })
     if(existedUser){
@@ -30,14 +30,16 @@ const registerUser=asynHandlers(async(req,res)=>{
     if(!avatar){
         throw new ApiError (400,"Avtar file is requied!");
     }
-   const User=await User.create({
+   const user=await User.create({
         fullname,
+        password,
         avatar:avatar.url,
         coverImage:coverImage?.url || "",
         email,
         username:username.toLowerCase()
     })
-    const createdUser=await User.findById(User._id).select(
+    console.log("CoverImage Details:",coverImage);
+    const createdUser=await User.findById(user._id).select(
         "-password -refreshToken"
     );
     if(!createdUser){
@@ -47,6 +49,7 @@ return res.status(201).json(
     new ApiResponse (200,createdUser,"User registered successfully")
 )
 });
+
 const loginUser=asynHandlers(async(req,res)=>{
     const {email, password}=req.body;
     res.status(200).json({
