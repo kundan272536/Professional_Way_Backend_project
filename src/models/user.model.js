@@ -3,6 +3,8 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 const ACCESS_TOKEN_SECRET="abcd";
 const REFRESH_TOKEN_SECRET="abcde";
+const REFRESH_TOKEN_EXPIRY="10 days";
+const ACCESS_TOKEN_EXPIRY="2 days";
 const userSchema=new Schema(
     {
        username:{
@@ -74,7 +76,7 @@ userSchema.methods.generateAccessToken= function(){
     },
     ACCESS_TOKEN_SECRET,
     {
-        expiresIn:1
+        expiresIn:ACCESS_TOKEN_EXPIRY
     }
  )
 }
@@ -85,7 +87,7 @@ userSchema.methods.generateRefreshToken=function(){
         },
         REFRESH_TOKEN_SECRET,
         {
-            expiresIn:10
+            expiresIn:REFRESH_TOKEN_EXPIRY
         }
     )
 }
