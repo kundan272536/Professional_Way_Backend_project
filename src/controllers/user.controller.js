@@ -283,7 +283,7 @@ const updateUserCoverImage=asynHandlers(async(req,res)=>{
     )
 })
 
-const getUserProfile=asynHandlers(async(req,res)=>{
+const getUserChannelProfile=asynHandlers(async(req,res)=>{
     const {username}=req.params;
     if(!username?.trim()){
         throw new ApiError(400,"Username is missing");
@@ -353,7 +353,7 @@ const getUserProfile=asynHandlers(async(req,res)=>{
     )
 })
 
-const getWatchHistory = asyncHandler(async(req, res) => {
+const getWatchHistory = asynHandlers(async(req, res) => {
     const user = await User.aggregate([
         {
             $match: {
@@ -417,6 +417,6 @@ export {
     updateAccountDetails,
     updateUserAvatar,
     updateUserCoverImage,
-    getUserProfile,
+    getUserChannelProfile,
     getWatchHistory
 };
